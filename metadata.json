@@ -1,0 +1,6 @@
+{
+  "name": "DukanKhata - Shop Manager",
+  "description": "Smart, fast shop management mobile app for Indian dukandars: staff QR attendance, auto salary slips, item-wise udhari, supplier dues, daily galla, and WhatsApp reminders in Hindi and English.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
