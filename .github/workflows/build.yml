@@ -33,7 +33,20 @@ jobs:
       - name: Setup Capacitor (JSON Config)
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android --legacy-peer-deps
-          echo '{"appId": "com.dukaan.pro", "appName": "Dukaan Pro", "webDir": "dist"}' > capacitor.config.json
+          cat << 'EOF' > capacitor.config.json
+          {
+            "appId": "com.dukaan.pro",
+            "appName": "Dukaan Pro",
+            "webDir": "dist",
+            "server": {
+              "androidScheme": "https",
+              "cleartext": true
+            },
+            "android": {
+              "allowMixedContent": true
+            }
+          }
+          EOF
           npx cap add android
           npx cap sync android
 
