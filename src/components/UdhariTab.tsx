@@ -694,7 +694,7 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
       {selectedCustomer ? (
         <div className="space-y-4">
         {/* Back Navigation Bar */}
-        <div className="flex items-center justify-between bg-slate-900 p-3 rounded-2xl border border-slate-800">
+        <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <button
             id="btn-back-to-udhari-list"
             onClick={() => {
@@ -702,7 +702,7 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
               setCustomerTxSearchQuery('');
               setExpandedTxIds({});
             }}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 text-xs font-bold transition-all active:scale-95"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 text-xs font-bold transition-all active:scale-95"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>{language === 'hi' ? 'उधारी सूची' : 'Udhari Khata'}</span>
@@ -726,17 +726,17 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
         </div>
 
         {/* Customer Header Card: Partial Payment Ledger (Requirements 7 & 9) */}
-        <div className="bg-slate-900 rounded-2xl p-5 border border-slate-800 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h2 className="text-lg font-bold text-white leading-tight">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
                 {selectedCustomer.name}
               </h2>
               <a
                 href={`tel:${selectedCustomer.phone}`}
-                className="text-xs text-slate-400 hover:text-emerald-400 flex items-center gap-1.5 mt-1 transition-colors"
+                className="text-xs text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center gap-1.5 mt-1 transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 text-slate-500" />
+                <Phone className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                 <span>{selectedCustomer.phone}</span>
               </a>
             </div>
@@ -766,30 +766,30 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
 
           {/* Ledger Numbers: Total Udhari, Received, Remaining */}
           <div className="grid grid-cols-3 gap-2 text-center pt-1">
-            <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
-              <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">
+            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800">
+              <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-semibold mb-0.5">
                 {language === 'hi' ? 'कुल उधारी' : 'Total Udhari'}
               </span>
-              <span className="text-sm font-black text-white">
+              <span className="text-sm font-black text-slate-900 dark:text-white">
                 {formatINR(selectedCustomer.totalAmount)}
               </span>
             </div>
 
-            <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40">
-              <span className="block text-[10px] text-emerald-400 font-semibold mb-0.5">
+            <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40">
+              <span className="block text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold mb-0.5">
                 {language === 'hi' ? 'जमा रकम' : 'Received'}
               </span>
-              <span className="text-sm font-black text-emerald-400">
+              <span className="text-sm font-black text-emerald-600 dark:text-emerald-400">
                 {formatINR(selectedCustomer.totalPaid)}
               </span>
             </div>
 
             <div className={`p-2.5 rounded-xl border ${
               selectedCustomer.totalOutstanding > 0
-                ? 'bg-rose-950/40 border-rose-800/40 text-rose-400'
-                : 'bg-slate-950/70 border-slate-800 text-slate-400'
+                ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800/40 text-rose-600 dark:text-rose-400'
+                : 'bg-slate-50 dark:bg-slate-950/70 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400'
             }`}>
-              <span className="block text-[10px] text-rose-400 font-semibold mb-0.5">
+              <span className="block text-[10px] text-rose-600 dark:text-rose-400 font-semibold mb-0.5">
                 {language === 'hi' ? 'शेष बाकी' : 'Remaining'}
               </span>
               <span className="text-sm font-black">
@@ -912,13 +912,13 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
                     ? 'लेनदेन खोजें (सामान, तारीख, नोट)...'
                     : 'Search transactions (Item, date, note)...'
                 }
-                className="w-full pl-9 pr-8 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-rose-500 transition-colors"
+                className="w-full pl-9 pr-8 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-rose-500 transition-colors shadow-sm"
               />
               {customerTxSearchQuery && (
                 <button
                   type="button"
                   onClick={() => setCustomerTxSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-0.5 rounded-full"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-white p-0.5 rounded-full"
                   title="Clear search"
                 >
                   <X className="w-3 h-3" />
@@ -928,12 +928,12 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
           )}
 
           {visibleCustomerTransactions.length === 0 ? (
-            <div className="p-6 text-center rounded-2xl bg-slate-900 border border-slate-800 text-xs text-slate-400 space-y-1.5">
+            <div className="p-6 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-1.5 shadow-sm">
               <p>No transactions matching "{customerTxSearchQuery}"</p>
               <button
                 type="button"
                 onClick={() => setCustomerTxSearchQuery('')}
-                className="text-xs text-rose-400 hover:underline font-bold"
+                className="text-xs text-rose-600 dark:text-rose-400 hover:underline font-bold"
               >
                 Clear Search
               </button>
@@ -952,16 +952,16 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
             return (
               <div
                 key={txId}
-                className="bg-slate-900 rounded-2xl border border-slate-800 shadow-sm overflow-hidden transition-all"
+                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-all"
               >
                 {/* Collapsed Header - Always visible with key summary info */}
                 <div
                   onClick={() => setExpandedTxIds((prev) => ({ ...prev, [txId]: !prev[txId] }))}
-                  className="p-3.5 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-850/60 transition-colors"
+                  className="p-3.5 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-850/60 transition-colors"
                 >
                   <div className="min-w-0 flex-1 space-y-1.5">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-xs font-bold text-white">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">
                         {formatDate(tx.transaction_date || tx.date, language)}
                       </span>
 
@@ -1297,14 +1297,14 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
       ) : (
         <div className="space-y-4">
         {/* 1. Header: "Udhari Khata" + Total pending amount (compact) + 2. Main Action: "+ New Udhari" */}
-      <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 bg-slate-900 p-3.5 rounded-2xl border border-slate-800">
+      <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 bg-white dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
-          <h2 className="text-base font-bold text-white tracking-tight">
+          <h2 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
             {language === 'hi' ? 'उधारी खाता' : 'Udhari Khata'}
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {language === 'hi' ? 'कुल बाकी उधारी:' : 'Total Pending:'}{' '}
-            <span className="text-rose-400 font-bold">{formatINR(grandTotalPending)}</span>
+            <span className="text-rose-600 dark:text-rose-400 font-bold">{formatINR(grandTotalPending)}</span>
           </p>
         </div>
 
@@ -1345,13 +1345,13 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
               ? 'उधारी / ग्राहक खोजें (नाम, फ़ोन, सामान)...'
               : 'Search udhari / customer (Name, Phone, Item)...'
           }
-          className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder-slate-500 focus:outline-none focus:border-rose-500 transition-colors"
+          className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-rose-500 transition-colors shadow-sm"
         />
         {searchQuery && (
           <button
             type="button"
             onClick={() => setSearchQuery('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-0.5 rounded-full"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-white p-0.5 rounded-full"
             title="Clear search"
           >
             <X className="w-3.5 h-3.5" />
@@ -1386,8 +1386,8 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
       {/* 5. Customer-first list: Shows customer summary cards only */}
       <div className="space-y-2.5">
         {filteredCustomers.length === 0 ? (
-          <div className="bg-slate-900 rounded-2xl p-8 text-center border border-slate-800 space-y-2">
-            <p className="text-sm font-bold text-slate-300">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 text-center border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+            <p className="text-sm font-bold text-slate-800 dark:text-slate-300">
               {searchQuery.trim()
                 ? `No udhari or customer matching "${searchQuery}"`
                 : language === 'hi'
@@ -1398,12 +1398,12 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="text-xs text-rose-400 hover:underline font-bold"
+                className="text-xs text-rose-600 dark:text-rose-400 hover:underline font-bold"
               >
                 Clear Search
               </button>
             ) : (
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 {language === 'hi'
                   ? 'नया उधारी जोड़ने के लिए ऊपर "+ New Udhari" पर क्लिक करें'
                   : 'Click "+ New Udhari" above to record a new entry'}
@@ -1423,12 +1423,12 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
                   setSelectedCustomerKey(cust.key);
                   setExpandedTxIds({}); // Collapsed by default as instructed
                 }}
-                className="bg-slate-900 rounded-2xl p-3.5 border border-slate-800 hover:border-slate-700 shadow-sm transition-all active:scale-[0.99] cursor-pointer flex items-center justify-between gap-3 group"
+                className="bg-white dark:bg-slate-900 rounded-2xl p-3.5 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition-all active:scale-[0.99] cursor-pointer flex items-center justify-between gap-3 group"
               >
                 {/* Left: Customer Name, Phone, Status Badge, Items count */}
                 <div className="min-w-0 flex-1 space-y-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-sm font-bold text-white truncate group-hover:text-rose-300 transition-colors">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-rose-600 dark:group-hover:text-rose-300 transition-colors">
                       {cust.name}
                     </h3>
 
@@ -1448,11 +1448,11 @@ export const UdhariTab: React.FC<UdhariTabProps> = ({
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-slate-400">
+                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                     <span>{cust.phone}</span>
                     <span>•</span>
                     {/* Number of pending items */}
-                    <span className="text-slate-300 font-medium">
+                    <span className="text-slate-600 dark:text-slate-300 font-medium">
                       {cust.pendingItems.length}{' '}
                       {cust.pendingItems.length === 1 ? 'item' : 'items'}
                     </span>

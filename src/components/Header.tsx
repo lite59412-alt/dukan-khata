@@ -57,18 +57,18 @@ export const Header: React.FC<HeaderProps> = ({
   }, [showUserMenu]);
 
   return (
-    <header className="sticky top-0 z-30 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-2.5 transition-all">
+    <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-2.5 transition-colors">
       <div className="max-w-2xl mx-auto flex items-center justify-between gap-2">
         {/* Shop Branding */}
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white shadow-md shadow-emerald-950/40 shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center text-white shadow-sm shrink-0">
             <Store className="w-5 h-5 text-white" />
           </div>
           <div className="min-w-0">
-            <h1 className="text-sm font-bold text-white tracking-tight truncate leading-snug">
+            <h1 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight truncate leading-snug">
               {currentUser?.name ? `${currentUser.name.split(' ')[0]} ki Dukan` : settings.shopName}
             </h1>
-            <p className="text-[11px] text-slate-400 font-medium truncate">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">
               {currentUser?.name || settings.ownerName}
               {settings.phone ? ` • ${settings.phone}` : (currentUser?.email ? ` • ${currentUser.email}` : '')}
             </p>
@@ -81,12 +81,12 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-quick-galla"
             onClick={onOpenGalla}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-semibold transition-all active:scale-95"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 dark:bg-emerald-500/10 dark:hover:bg-emerald-500/20 dark:border-emerald-500/30 dark:text-emerald-400 text-xs font-semibold transition-all active:scale-95 cursor-pointer"
             title={t.galla.title}
           >
-            <Coins className="w-3.5 h-3.5 text-emerald-400" />
+            <Coins className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             <span className="hidden xs:inline">{t.tabs.home === 'होम' ? 'गल्ला' : 'Galla'}:</span>
-            <span>{formatINR(currentCash)}</span>
+            <span className="font-bold">{formatINR(currentCash)}</span>
           </button>
 
           {/* Admin Dashboard Badge (only for lite59412@gmail.com) */}
@@ -94,10 +94,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="btn-header-admin-badge"
               onClick={onOpenAdminPanel}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 text-xs font-bold transition-all active:scale-95 shadow-sm shadow-amber-950/40"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 dark:bg-amber-500/20 dark:hover:bg-amber-500/30 dark:border-amber-500/50 dark:text-amber-300 text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-xs"
               title="Admin Dashboard (Generate 1-Year Key & Manage Users)"
             >
-              <Key className="w-3.5 h-3.5 text-amber-400" />
+              <Key className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
               <span className="hidden sm:inline">Admin Dashboard</span>
               <span className="sm:hidden">Admin</span>
             </button>
@@ -109,15 +109,15 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 id="btn-user-profile-header"
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg border text-xs font-semibold transition-all active:scale-95 ${
+                className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg border text-xs font-semibold transition-all active:scale-95 cursor-pointer ${
                   currentUser.isGuest
-                    ? 'bg-amber-500/15 hover:bg-amber-500/25 border-amber-500/40 text-amber-300'
-                    : 'bg-sky-500/10 hover:bg-sky-500/20 border-sky-500/30 text-sky-300'
+                    ? 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-800 dark:bg-amber-500/15 dark:hover:bg-amber-500/25 dark:border-amber-500/40 dark:text-amber-300'
+                    : 'bg-sky-50 hover:bg-sky-100 border-sky-200 text-sky-800 dark:bg-sky-500/10 dark:hover:bg-sky-500/20 dark:border-sky-500/30 dark:text-sky-300'
                 }`}
                 title={currentUser.isGuest ? 'Guest/Test Mode (Temporary)' : `${currentUser.name} (${currentUser.email})`}
               >
                 {currentUser.isGuest ? (
-                  <div className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                  <div className="w-4 h-4 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 flex items-center justify-center">
                     <FlaskConical className="w-3 h-3" />
                   </div>
                 ) : currentUser.photoURL ? (
@@ -135,20 +135,20 @@ export const Header: React.FC<HeaderProps> = ({
                   {currentUser.isGuest ? 'Guest Mode' : currentUser.name.split(' ')[0]}
                 </span>
                 {currentUser.isGuest ? (
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
                 ) : isSyncing ? (
-                  <RefreshCw className="w-3 h-3 text-sky-400 animate-spin" />
+                  <RefreshCw className="w-3 h-3 text-sky-500 dark:text-sky-400 animate-spin" />
                 ) : (
-                  <Cloud className="w-3 h-3 text-emerald-400" />
+                  <Cloud className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                 )}
               </button>
 
               {/* User Dropdown Menu */}
               {showUserMenu && (
-                <div className="absolute right-0 mt-1.5 w-64 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl p-3 z-50 animate-in fade-in zoom-in-95 duration-150">
-                  <div className="flex items-center gap-2.5 pb-2.5 border-b border-slate-800">
+                <div className="absolute right-0 mt-1.5 w-64 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl p-3 z-50 animate-in fade-in zoom-in-95 duration-150">
+                  <div className="flex items-center gap-2.5 pb-2.5 border-b border-slate-100 dark:border-slate-800">
                     {currentUser.isGuest ? (
-                      <div className="w-9 h-9 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+                      <div className="w-9 h-9 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 flex items-center justify-center font-bold">
                         <FlaskConical className="w-5 h-5" />
                       </div>
                     ) : currentUser.photoURL ? (
@@ -163,25 +163,25 @@ export const Header: React.FC<HeaderProps> = ({
                       </div>
                     )}
                     <div className="min-w-0 flex-1">
-                      <p className="text-xs font-bold text-white truncate">{currentUser.name}</p>
-                      <p className="text-[11px] text-slate-400 truncate">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white truncate">{currentUser.name}</p>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
                         {currentUser.isGuest ? 'Temporary In-Memory Session' : currentUser.email}
                       </p>
                       <div className="flex items-center gap-1 mt-0.5 text-[10px]">
                         {currentUser.isGuest ? (
-                          <span className="text-amber-400 font-semibold flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                          <span className="text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                             Guest/Test Mode
                           </span>
                         ) : (
-                          <span className="text-emerald-400 flex items-center gap-1">
+                          <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-semibold">
                             <CheckCircle2 className="w-3 h-3" />
                             Cloud Firestore Linked
                           </span>
                         )}
                       </div>
                       {!currentUser.isGuest && subscription?.isValid && (
-                        <div className="mt-1 px-2 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-semibold flex items-center justify-between">
+                        <div className="mt-1 px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold flex items-center justify-between">
                           <span>1-Year Pro Active</span>
                           <span>{subscription.daysRemaining}d left</span>
                         </div>
@@ -197,9 +197,9 @@ export const Header: React.FC<HeaderProps> = ({
                           onSyncNow?.();
                         }}
                         disabled={isSyncing}
-                        className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800 hover:text-white transition-all text-left disabled:opacity-50"
+                        className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-left disabled:opacity-50 cursor-pointer"
                       >
-                        <RefreshCw className={`w-3.5 h-3.5 text-sky-400 ${isSyncing ? 'animate-spin' : ''}`} />
+                        <RefreshCw className={`w-3.5 h-3.5 text-sky-500 dark:text-sky-400 ${isSyncing ? 'animate-spin' : ''}`} />
                         <span>{isSyncing ? 'Saving to Cloud...' : 'Sync to Cloud Now'}</span>
                       </button>
                     )}
@@ -208,9 +208,9 @@ export const Header: React.FC<HeaderProps> = ({
                         setShowUserMenu(false);
                         onOpenBackup();
                       }}
-                      className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800 hover:text-white transition-all text-left"
+                      className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all text-left cursor-pointer"
                     >
-                      <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                       <span>{currentUser.isGuest ? 'Test Data Backup' : t.backup.title}</span>
                     </button>
                     {!currentUser.isGuest && isUserAdmin(currentUser?.email) && (
@@ -219,21 +219,21 @@ export const Header: React.FC<HeaderProps> = ({
                           setShowUserMenu(false);
                           onOpenAdminPanel?.();
                         }}
-                        className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-bold text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 transition-all text-left"
+                        className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100 dark:hover:bg-amber-500/20 border border-amber-200 dark:border-amber-500/30 transition-all text-left cursor-pointer"
                       >
-                        <Key className="w-3.5 h-3.5 text-amber-400" />
+                        <Key className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                         <span>Super Admin Panel</span>
                       </button>
                     )}
                   </div>
 
-                  <div className="pt-2 border-t border-slate-800">
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
                     <button
                       onClick={() => {
                         setShowUserMenu(false);
                         onLogout?.();
                       }}
-                      className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all"
+                      className="w-full flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all cursor-pointer"
                     >
                       <LogOut className="w-3.5 h-3.5" />
                       <span>{currentUser.isGuest ? 'Exit Guest Mode' : 'Sign Out'}</span>
@@ -246,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="btn-google-login-header"
               onClick={onLoginWithGoogle}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/35 text-emerald-300 text-xs font-semibold shadow-sm transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 dark:bg-emerald-500/15 dark:hover:bg-emerald-500/25 dark:border-emerald-500/35 dark:text-emerald-300 text-xs font-semibold shadow-xs transition-all active:scale-95 cursor-pointer"
               title="Login with Google to save data on Cloud Firestore"
             >
               <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">
@@ -276,7 +276,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-switch-lang"
             onClick={onLanguageToggle}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold transition-all active:scale-95"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 dark:border-amber-500/30 dark:text-amber-300 text-xs font-bold transition-all active:scale-95 cursor-pointer"
             title="Switch Language / भाषा बदलें"
           >
             <Languages className="w-3.5 h-3.5" />
@@ -287,7 +287,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-header-backup"
             onClick={onOpenBackup}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-teal-400 transition-all active:scale-95"
+            className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-teal-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:text-teal-400 transition-all active:scale-95 cursor-pointer"
             title={t.backup.title}
           >
             <ShieldCheck className="w-4 h-4" />
@@ -297,7 +297,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-header-settings"
             onClick={onOpenSettings}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-all active:scale-95"
+            className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:text-slate-300 transition-all active:scale-95 cursor-pointer"
             title={t.common.settings}
           >
             <Settings className="w-4 h-4" />

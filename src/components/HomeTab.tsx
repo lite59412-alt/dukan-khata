@@ -83,18 +83,18 @@ export const HomeTab: React.FC<HomeTabProps> = ({
   return (
     <div className="space-y-4 pb-24">
       {/* Date & Greeting Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 rounded-2xl p-4 border border-slate-800 shadow-lg flex items-center justify-between">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between transition-colors">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
+          <span className="text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
             {language === 'hi' ? 'दुकान स्थिति' : 'Today Overview'}
           </span>
-          <h2 className="text-xl font-bold text-white tracking-tight mt-0.5">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight mt-0.5">
             {language === 'hi' ? 'शुभ लाभ!' : 'Welcome Back,'}{' '}
             {state.settings.ownerName
               ? state.settings.ownerName.split(' ')[0]
               : (language === 'hi' ? 'दुकानदार' : 'Shopkeeper')}
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {formatDate(todayStr, language)} • {state.settings.shopName}
           </p>
         </div>
@@ -102,13 +102,13 @@ export const HomeTab: React.FC<HomeTabProps> = ({
         <button
           id="btn-home-galla-banner"
           onClick={onOpenGalla}
-          className="flex flex-col items-end px-3 py-2 rounded-xl bg-slate-800/80 border border-slate-700/80 hover:border-emerald-500/40 transition-all text-right group"
+          className="flex flex-col items-end px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 hover:border-emerald-500 transition-all text-right group cursor-pointer"
         >
-          <div className="flex items-center gap-1.5 text-xs text-slate-300 font-medium">
-            <Coins className="w-3.5 h-3.5 text-amber-400" />
+          <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 font-medium">
+            <Coins className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
             <span>{language === 'hi' ? 'गल्ला स्थिति' : 'Cash Galla'}</span>
           </div>
-          <span className="text-sm font-bold text-emerald-400 mt-0.5 group-hover:scale-105 transition-transform">
+          <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400 mt-0.5 group-hover:scale-105 transition-transform">
             {formatINR(todayGalla.openingCash + todayGalla.cashIn - todayGalla.expenseOut)}
           </span>
         </button>
@@ -117,10 +117,10 @@ export const HomeTab: React.FC<HomeTabProps> = ({
       {/* QUICK ACTIONS BAR (Large, Touch-Friendly Buttons) */}
       <div>
         <div className="flex items-center justify-between mb-2 px-1">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             {language === 'hi' ? 'त्वरित कार्य (Quick Actions)' : 'Quick Actions'}
           </h3>
-          <span className="text-[11px] text-slate-400">1-Tap Fast Actions</span>
+          <span className="text-[11px] text-slate-400 dark:text-slate-500">1-Tap Fast Actions</span>
         </div>
 
         <div className="grid grid-cols-2 gap-2.5">
@@ -128,16 +128,16 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <button
             id="qa-add-udhari"
             onClick={onOpenAddUdhari}
-            className="flex items-center gap-3 p-3.5 rounded-xl bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-500/40 text-left transition-all active:scale-98 shadow-sm group"
+            className="flex items-center gap-3 p-3.5 rounded-xl bg-emerald-50 hover:bg-emerald-100/80 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-500/40 text-left transition-all active:scale-98 shadow-2xs group cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:bg-emerald-500/30 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-emerald-600 text-white dark:bg-emerald-500/20 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <PlusCircle className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-sm font-bold text-white block leading-tight">
+              <span className="text-sm font-bold text-emerald-950 dark:text-white block leading-tight">
                 {t.quickActions.addUdhari}
               </span>
-              <span className="text-[11px] text-emerald-300/80 mt-0.5 block">
+              <span className="text-[11px] text-emerald-700 dark:text-emerald-300/80 mt-0.5 block">
                 {language === 'hi' ? 'सामान सहित पर्ची' : 'Item-wise Khata'}
               </span>
             </div>
@@ -147,16 +147,16 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <button
             id="qa-mark-attendance"
             onClick={onOpenMarkAttendance}
-            className="flex items-center gap-3 p-3.5 rounded-xl bg-blue-950/40 hover:bg-blue-900/50 border border-blue-500/40 text-left transition-all active:scale-98 shadow-sm group"
+            className="flex items-center gap-3 p-3.5 rounded-xl bg-blue-50 hover:bg-blue-100/80 dark:bg-blue-950/40 dark:hover:bg-blue-900/50 border border-blue-200 dark:border-blue-500/40 text-left transition-all active:scale-98 shadow-2xs group cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 group-hover:bg-blue-500/30 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-blue-600 text-white dark:bg-blue-500/20 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <UserCheck className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-sm font-bold text-white block leading-tight">
+              <span className="text-sm font-bold text-blue-950 dark:text-white block leading-tight">
                 {t.quickActions.markAttendance}
               </span>
-              <span className="text-[11px] text-blue-300/80 mt-0.5 block">
+              <span className="text-[11px] text-blue-700 dark:text-blue-300/80 mt-0.5 block">
                 {language === 'hi' ? 'QR व मैनुअल हाजिरी' : 'QR & Manual'}
               </span>
             </div>
@@ -166,16 +166,16 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <button
             id="qa-add-expense"
             onClick={onOpenAddExpense}
-            className="flex items-center gap-3 p-3.5 rounded-xl bg-rose-950/40 hover:bg-rose-900/50 border border-rose-500/40 text-left transition-all active:scale-98 shadow-sm group"
+            className="flex items-center gap-3 p-3.5 rounded-xl bg-rose-50 hover:bg-rose-100/80 dark:bg-rose-950/40 dark:hover:bg-rose-900/50 border border-rose-200 dark:border-rose-500/40 text-left transition-all active:scale-98 shadow-2xs group cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 group-hover:bg-rose-500/30 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-rose-600 text-white dark:bg-rose-500/20 dark:text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <Receipt className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-sm font-bold text-white block leading-tight">
+              <span className="text-sm font-bold text-rose-950 dark:text-white block leading-tight">
                 {t.quickActions.addExpense}
               </span>
-              <span className="text-[11px] text-rose-300/80 mt-0.5 block">
+              <span className="text-[11px] text-rose-700 dark:text-rose-300/80 mt-0.5 block">
                 {language === 'hi' ? 'चाय, भाड़ा, बिल' : 'Tea, Freight, Bills'}
               </span>
             </div>
@@ -185,16 +185,16 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <button
             id="qa-generate-salary"
             onClick={onOpenSalaryGen}
-            className="flex items-center gap-3 p-3.5 rounded-xl bg-amber-950/40 hover:bg-amber-900/50 border border-amber-500/40 text-left transition-all active:scale-98 shadow-sm group"
+            className="flex items-center gap-3 p-3.5 rounded-xl bg-amber-50 hover:bg-amber-100/80 dark:bg-amber-950/40 dark:hover:bg-amber-900/50 border border-amber-200 dark:border-amber-500/40 text-left transition-all active:scale-98 shadow-2xs group cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500/30 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-amber-600 text-white dark:bg-amber-500/20 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <FileSpreadsheet className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-sm font-bold text-white block leading-tight">
+              <span className="text-sm font-bold text-amber-950 dark:text-white block leading-tight">
                 {t.quickActions.generateSalary}
               </span>
-              <span className="text-[11px] text-amber-300/80 mt-0.5 block">
+              <span className="text-[11px] text-amber-700 dark:text-amber-300/80 mt-0.5 block">
                 {language === 'hi' ? 'सैलरी स्लिप + व्हाट्सएप' : 'Auto Slip & WhatsApp'}
               </span>
             </div>
@@ -205,10 +205,10 @@ export const HomeTab: React.FC<HomeTabProps> = ({
       {/* 6 CORE SUMMARY CARDS (Mandatory requirement) */}
       <div>
         <div className="flex items-center justify-between mb-2 px-1">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             {language === 'hi' ? 'खाता स्थिति व सारांश' : 'Summary Dashboard'}
           </h3>
-          <span className="text-[11px] text-slate-400">
+          <span className="text-[11px] text-slate-400 dark:text-slate-500">
             {language === 'hi' ? 'दैनिक अपडेट' : 'Real-time Stats'}
           </span>
         </div>
@@ -218,20 +218,20 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <div
             id="card-today-sales"
             onClick={onOpenGalla}
-            className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden shadow-2xs"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-400 truncate">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">
                 {t.metrics.todaySales}
               </span>
-              <div className="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <TrendingUp className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-lg font-bold text-white mt-1.5 tracking-tight">
+            <p className="text-lg font-extrabold text-slate-900 dark:text-white mt-1.5 tracking-tight">
               {formatINR(todaySales)}
             </p>
-            <p className="text-[10px] text-slate-400 mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               Cash: {formatINR(todayGalla.cashIn)} • UPI: {formatINR(todayGalla.upiIn)}
             </p>
           </div>
@@ -240,20 +240,20 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <div
             id="card-pending-udhari"
             onClick={() => onNavigateTab('udhari')}
-            className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-rose-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden shadow-2xs"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-400 truncate">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">
                 {t.metrics.pendingUdhari}
               </span>
-              <div className="w-7 h-7 rounded-lg bg-rose-500/15 text-rose-400 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-rose-50 dark:bg-rose-500/15 text-rose-600 dark:text-rose-400 flex items-center justify-center">
                 <BookOpen className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-lg font-bold text-rose-400 mt-1.5 tracking-tight">
+            <p className="text-lg font-extrabold text-rose-600 dark:text-rose-400 mt-1.5 tracking-tight">
               {formatINR(pendingUdhariTotal)}
             </p>
-            <p className="text-[10px] text-slate-400 mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               {state.udhariList.filter((u) => !u.isPaid).length} {language === 'hi' ? 'ग्राहकों पर बाकी' : 'Customers Pending'}
             </p>
           </div>
@@ -262,20 +262,20 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <div
             id="card-supplier-due"
             onClick={() => onNavigateTab('supplier')}
-            className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden shadow-2xs"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-400 truncate">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">
                 {t.metrics.supplierDue}
               </span>
-              <div className="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center">
                 <Truck className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-lg font-bold text-amber-400 mt-1.5 tracking-tight">
+            <p className="text-lg font-extrabold text-amber-600 dark:text-amber-400 mt-1.5 tracking-tight">
               {formatINR(supplierDueTotal)}
             </p>
-            <p className="text-[10px] text-slate-400 mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               {state.supplierList.filter((s) => s.status !== 'paid').length} {language === 'hi' ? 'सप्लायर बिल बाकी' : 'Suppliers to Pay'}
             </p>
           </div>
@@ -284,20 +284,20 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <div
             id="card-staff-present"
             onClick={() => onNavigateTab('staff')}
-            className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden shadow-2xs"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-400 truncate">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">
                 {t.metrics.staffPresent}
               </span>
-              <div className="w-7 h-7 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center">
                 <Users className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-lg font-bold text-blue-400 mt-1.5 tracking-tight">
+            <p className="text-lg font-extrabold text-blue-600 dark:text-blue-400 mt-1.5 tracking-tight">
               {staffPresentCount} / {state.staffList.length}
             </p>
-            <p className="text-[10px] text-slate-400 mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               {state.staffList.length - staffPresentCount} {language === 'hi' ? 'गैरहाजिर' : 'Absent today'}
             </p>
           </div>
@@ -306,20 +306,20 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <div
             id="card-salary-pending"
             onClick={() => onNavigateTab('staff')}
-            className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden shadow-2xs"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-400 truncate">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">
                 {t.metrics.salaryPending}
               </span>
-              <div className="w-7 h-7 rounded-lg bg-purple-500/15 text-purple-400 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-purple-50 dark:bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center justify-center">
                 <Banknote className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-lg font-bold text-purple-300 mt-1.5 tracking-tight">
+            <p className="text-lg font-extrabold text-purple-700 dark:text-purple-300 mt-1.5 tracking-tight">
               {formatINR(salaryPendingTotal)}
             </p>
-            <p className="text-[10px] text-slate-400 mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               {state.staffList.length} {language === 'hi' ? 'कर्मचारियों का माह वेतन' : 'Staff for this month'}
             </p>
           </div>
@@ -328,20 +328,20 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <div
             id="card-today-expenses"
             onClick={onOpenAddExpense}
-            className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-teal-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-500/50 cursor-pointer transition-all active:scale-98 relative overflow-hidden shadow-2xs"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-400 truncate">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate">
                 {t.metrics.todayExpenses}
               </span>
-              <div className="w-7 h-7 rounded-lg bg-teal-500/15 text-teal-400 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-teal-50 dark:bg-teal-500/15 text-teal-600 dark:text-teal-400 flex items-center justify-center">
                 <Receipt className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-lg font-bold text-teal-300 mt-1.5 tracking-tight">
+            <p className="text-lg font-extrabold text-teal-700 dark:text-teal-300 mt-1.5 tracking-tight">
               {formatINR(todayExpensesTotal)}
             </p>
-            <p className="text-[10px] text-slate-400 mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               {state.expenseList.filter((e) => e.date === todayStr).length} {language === 'hi' ? 'खर्चे दर्ज' : 'Recorded entries'}
             </p>
           </div>
@@ -350,15 +350,15 @@ export const HomeTab: React.FC<HomeTabProps> = ({
 
       {/* OVERDUE UDHARI ALERT SECTION */}
       {overdueUdhari.length > 0 && (
-        <div className="bg-slate-900/90 rounded-2xl p-3.5 border border-rose-900/30">
-          <div className="flex items-center justify-between mb-2.5">
-            <div className="flex items-center gap-1.5 text-rose-400 text-xs font-bold">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-rose-200 dark:border-rose-900/40 shadow-2xs">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-1.5 text-rose-600 dark:text-rose-400 text-xs font-bold">
               <AlertTriangle className="w-4 h-4" />
               <span>{language === 'hi' ? 'तारीख निकली उधारी (तगादा भेजें)' : 'Overdue Khata (Remind Now)'}</span>
             </div>
             <button
               onClick={() => onNavigateTab('udhari')}
-              className="text-[11px] text-slate-400 hover:text-white flex items-center gap-0.5 font-medium"
+              className="text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-0.5 font-medium cursor-pointer"
             >
               <span>{language === 'hi' ? 'सभी देखें' : 'View All'}</span>
               <ArrowRight className="w-3 h-3" />
@@ -377,29 +377,29 @@ export const HomeTab: React.FC<HomeTabProps> = ({
               return (
                 <div
                   key={u.id}
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-850 border border-slate-800/80 gap-2"
+                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-800/80 gap-2"
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="text-xs font-bold text-white truncate">{u.customerName}</p>
-                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 font-semibold shrink-0">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white truncate">{u.customerName}</p>
+                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-100 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300 font-semibold shrink-0">
                         {language === 'hi' ? 'देरी' : 'Overdue'}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-400 truncate mt-0.5">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
                       {u.itemName} ({u.quantity})
                     </p>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-xs font-bold text-rose-400">
+                    <span className="text-xs font-extrabold text-rose-600 dark:text-rose-400">
                       {formatINR(u.amount)}
                     </span>
                     <a
                       href={waLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold shadow-sm transition-transform active:scale-95"
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold shadow-xs transition-transform active:scale-95"
                       title="Send WhatsApp Reminder"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
@@ -415,15 +415,15 @@ export const HomeTab: React.FC<HomeTabProps> = ({
 
       {/* FRESH ACCOUNT EMPTY STATE BANNER */}
       {state.udhariList.length === 0 && state.expenseList.length === 0 && state.supplierList.length === 0 && (
-        <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center space-y-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-3.5 shadow-2xs">
+          <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
             <Coins className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               {language === 'hi' ? 'कोई रिकॉर्ड नहीं मिला • खाता नया है' : 'No Records Found • Fresh Account'}
             </h3>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
               {language === 'hi'
                 ? 'शुरुआत करने के लिए पहली उधारी, गल्ला या खर्चा दर्ज करें।'
                 : 'Start fresh by recording your first customer udhari, galla balance, or expense.'}
@@ -432,23 +432,23 @@ export const HomeTab: React.FC<HomeTabProps> = ({
           <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
             <button
               onClick={onOpenAddUdhari}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-950/40 transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition-all active:scale-95 cursor-pointer"
             >
               <PlusCircle className="w-4 h-4" />
               <span>{language === 'hi' ? '+ पहली उधारी जोड़ें' : '+ Add First Udhari'}</span>
             </button>
             <button
               onClick={onOpenGalla}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 text-xs font-semibold transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-semibold transition-all active:scale-95 cursor-pointer"
             >
-              <Coins className="w-4 h-4 text-emerald-400" />
+              <Coins className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>{language === 'hi' ? 'गल्ला दर्ज करें' : 'Set Galla Cash'}</span>
             </button>
             <button
               onClick={() => onNavigateTab('supplier')}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 text-xs font-semibold transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-semibold transition-all active:scale-95 cursor-pointer"
             >
-              <Truck className="w-4 h-4 text-amber-400" />
+              <Truck className="w-4 h-4 text-amber-600 dark:text-amber-400" />
               <span>{language === 'hi' ? 'सप्लायर बिल जोड़ें' : 'Add Supplier Due'}</span>
             </button>
           </div>

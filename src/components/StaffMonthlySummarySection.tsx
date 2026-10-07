@@ -56,8 +56,8 @@ export const StaffMonthlySummarySection: React.FC<StaffMonthlySummarySectionProp
       case 'Unpaid':
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-slate-800 text-slate-300 border border-slate-700">
-            <AlertCircle className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-rose-500/20 text-rose-400 border border-rose-500/30">
+            <AlertCircle className="w-3.5 h-3.5 shrink-0 text-rose-400" />
             <span>Unpaid</span>
           </span>
         );
@@ -172,8 +172,9 @@ export const StaffMonthlySummarySection: React.FC<StaffMonthlySummarySectionProp
                 </span>
               </div>
               <span className="text-[10px] text-emerald-500/80 mt-1.5 font-medium">
-                {summary.completedPayments.length}{' '}
-                {summary.completedPayments.length === 1 ? 'completed payment' : 'completed payments'}
+                {summary.completedPayments.length === 0
+                  ? 'No payments this month'
+                  : `${summary.completedPayments.length} ${summary.completedPayments.length === 1 ? 'completed payment' : 'completed payments'}`}
               </span>
             </div>
 

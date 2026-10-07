@@ -10,8 +10,20 @@ import {
   Unlock,
   CheckCircle2,
   ShieldAlert,
+  Rocket,
+  Download,
+  Sparkles,
+  ExternalLink,
+  Globe,
 } from 'lucide-react';
 import { GoogleUserProfile } from '../utils/cloudBackupService';
+import {
+  CURRENT_APP_VERSION,
+  getRemoteVersionConfig,
+  saveRemoteVersionConfig,
+  VersionControlConfig,
+} from '../utils/versionService';
+import { UpdateAvailableModal } from './UpdateAvailableModal';
 import {
   isUserAdmin,
   createNewLicenseKey,
@@ -33,7 +45,7 @@ interface AdminPanelModalProps {
   onKeyGenerated?: (key: string) => void;
 }
 
-type TabType = 'keys' | 'users' | 'proofs';
+type TabType = 'keys' | 'users' | 'proofs' | 'version';
 
 export const AdminPanelModal: React.FC<AdminPanelModalProps> = ({
   currentUser,
@@ -60,7 +72,40 @@ export const AdminPanelModal: React.FC<AdminPanelModalProps> = ({
   const [isLoadingProofs, setIsLoadingProofs] = useState(false);
   const [processingReqId, setProcessingReqId] = useState<string | null>(null);
 
+  // App Version Control State (app_config/version_control)
+  const [targetVersion, setTargetVersion] = useState('1.1.0');
+  const [updateUrl, setUpdateUrl] = useState('https://dukaankhata.web.app/download');
+  const [releaseNotesText, setReleaseNotesText] = useState(
+    'New quick 1-tap staff attendance sheet\nRolling balance & salary enhancements\nPerformance improvements and bug fixes'
+  );
+  const [isMandatoryUpdate, setIsMandatoryUpdate] = useState(false);
+  const [isLoadingVersion, setIsLoadingVersion] = useState(false);
+  const [isSavingVersion, setIsSavingVersion] = useState(false);
+  const [versionSaveSuccess, setVersionSaveSuccess] = useState<string | null>(null);
+  const [previewModalOpen, setPreviewModalOpen] = useState(false);
+
   const isAdmin = isUserAdmin(currentUser?.email);
+
+  const loadVersionConfig = async () => {
+    setIsLoadingVersion(true);
+    try {
+      const cfg = await getRemoteVersionConfig();
+      if (cfg) {
+        if (cfg.version) setTargetVersion(cfg.version);
+        if (cfg.update_url) setUpdateUrl(cfg.update_url);
+        if (cfg.release_notes) {
+          if (Array.isArray(cfg.release_notes)) {
+            setReleaseNotesText(cfg.release_notes.join('\n'));
+          } else {
+            setReleaseNotesText(String(cfg.release_notes));
+          }
+        }
+        setIsMandatoryUpdate(Boolean(cfg.is_mandatory));
+      }
+    } finally {
+      setIsLoadingVersion(false);
+    }
+  };
 
   const loadKeys = async () => {
     if (!isAdmin) return;
@@ -92,6 +137,25 @@ export const AdminPanelModal: React.FC<AdminPanelModalProps> = ({
       setPaymentRequests(records);
     } finally {
       setIsLoadingProofs(false);
+    }
+  };
+
+  const handleSaveVersion = async () => {
+    setIsSavingVersion(true);
+    setVersionSaveSuccess(null);
+    try {
+      await saveRemoteVersionConfig({
+        version: targetVersion.trim(),
+        update_url: updateUrl.trim(),
+        release_notes: releaseNotesText.split('\n').filter(Boolean),
+        is_mandatory: isMandatoryUpdate,
+      });
+      setVersionSaveSuccess(`Version v${targetVersion.trim()} published to Firestore (app_config/version_control)!`);
+      setTimeout(() => setVersionSaveSuccess(null), 4000);
+    } catch (err: any) {
+      alert(`Save failed: ${err?.message || 'Error'}`);
+    } finally {
+      setIsSavingVersion(false);
     }
   };
 
@@ -251,6 +315,20 @@ export const AdminPanelModal: React.FC<AdminPanelModalProps> = ({
                 {pendingProofsCount}
               </span>
             )}
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('version');
+              loadVersionConfig();
+            }}
+            className={`pb-2 px-3 text-xs font-bold border-b-2 transition-all flex items-center gap-1.5 ${
+              activeTab === 'version'
+                ? 'border-violet-400 text-violet-400'
+                : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Rocket className="w-3.5 h-3.5" />
+            <span>App Versions</span>
           </button>
         </div>
 
@@ -476,6 +554,117 @@ export const AdminPanelModal: React.FC<AdminPanelModalProps> = ({
               </div>
             </div>
           )}
+
+          {/* TAB 4: APP VERSION CONTROL */}
+          {activeTab === 'version' && (
+            <div className="space-y-4">
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <div className="flex items-center gap-2">
+                    <Rocket className="w-4 h-4 text-violet-400" />
+                    <div>
+                      <h4 className="text-xs font-bold text-white">Firestore Version Control</h4>
+                      <p className="text-[10px] text-slate-400 font-mono">Collection: app_config / Document: version_control</p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={loadVersionConfig}
+                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer"
+                    title="Reload from Firestore"
+                  >
+                    <RefreshCw className={`w-3.5 h-3.5 ${isLoadingVersion ? 'animate-spin' : ''}`} />
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+                  <span className="text-slate-400">Current App Code Version:</span>
+                  <span className="font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">
+                    v{CURRENT_APP_VERSION}
+                  </span>
+                </div>
+
+                {versionSaveSuccess && (
+                  <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>{versionSaveSuccess}</span>
+                  </div>
+                )}
+
+                <div className="space-y-3 pt-1">
+                  <div>
+                    <label className="text-[11px] font-bold text-slate-300 block mb-1">
+                      Target Version in Firestore (e.g., 1.1.0)
+                    </label>
+                    <input
+                      type="text"
+                      value={targetVersion}
+                      onChange={(e) => setTargetVersion(e.target.value)}
+                      placeholder="1.1.0"
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-violet-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-bold text-slate-300 block mb-1">
+                      Download Update URL (update_url)
+                    </label>
+                    <input
+                      type="url"
+                      value={updateUrl}
+                      onChange={(e) => setUpdateUrl(e.target.value)}
+                      placeholder="https://..."
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-violet-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-bold text-slate-300 block mb-1">
+                      Release Notes (One item per line)
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={releaseNotesText}
+                      onChange={(e) => setReleaseNotesText(e.target.value)}
+                      placeholder="Enter release notes..."
+                      className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-violet-500"
+                    />
+                  </div>
+
+                  <label className="flex items-center gap-2 cursor-pointer p-2 rounded-xl hover:bg-slate-900 text-xs text-slate-300">
+                    <input
+                      type="checkbox"
+                      checked={isMandatoryUpdate}
+                      onChange={(e) => setIsMandatoryUpdate(e.target.checked)}
+                      className="rounded border-slate-700 text-violet-600 focus:ring-0"
+                    />
+                    <span>Mark as Mandatory Update (User cannot dismiss)</span>
+                  </label>
+
+                  <div className="flex items-center gap-2 pt-2">
+                    <button
+                      type="button"
+                      onClick={handleSaveVersion}
+                      disabled={isSavingVersion}
+                      className="flex-1 py-2.5 px-4 rounded-xl bg-violet-600 hover:bg-violet-500 active:scale-95 disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      {isSavingVersion ? 'Saving to Firestore...' : 'Publish Version to Firestore'}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setPreviewModalOpen(true)}
+                      className="py-2.5 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition-all flex items-center gap-1.5 cursor-pointer"
+                      title="Preview how users see the update popup"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Preview Popup</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Footer */}
@@ -488,6 +677,21 @@ export const AdminPanelModal: React.FC<AdminPanelModalProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Preview Modal */}
+      {previewModalOpen && (
+        <UpdateAvailableModal
+          isOpen={previewModalOpen}
+          currentVersion={CURRENT_APP_VERSION}
+          config={{
+            version: targetVersion,
+            update_url: updateUrl,
+            release_notes: releaseNotesText.split('\n').filter(Boolean),
+            is_mandatory: isMandatoryUpdate,
+          }}
+          onClose={() => setPreviewModalOpen(false)}
+        />
+      )}
     </div>
   );
 };

@@ -293,18 +293,18 @@ export const BackupRestoreModal: React.FC<BackupRestoreModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto">
-      <div className="w-full max-w-lg bg-slate-900 rounded-t-3xl sm:rounded-2xl border border-slate-800 p-4 sm:p-5 shadow-2xl space-y-4 my-auto max-h-[94vh] overflow-y-auto">
+      <div className="w-full max-w-lg bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-2xl space-y-4 my-auto max-h-[94vh] overflow-y-auto">
         {/* Modal Header */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center text-teal-400">
+            <div className="w-9 h-9 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
               <Cloud className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white leading-tight">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white leading-tight">
                 {t.backup.title}
               </h3>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 {language === 'hi'
                   ? 'Google खाता और क्लाउड डेटा सिंक'
                   : 'Google Account & Cloud Data Vault'}
@@ -315,7 +315,7 @@ export const BackupRestoreModal: React.FC<BackupRestoreModalProps> = ({
           <div className="flex items-center gap-2">
             {/* Sync status indicator */}
             <div
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-[11px] font-bold ${syncIndicator.color}`}
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-bold ${syncIndicator.color}`}
             >
               <syncIndicator.icon className="w-3.5 h-3.5" />
               <span>{syncIndicator.label}</span>
@@ -323,7 +323,7 @@ export const BackupRestoreModal: React.FC<BackupRestoreModalProps> = ({
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

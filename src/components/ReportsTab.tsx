@@ -104,15 +104,15 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
   return (
     <div className="space-y-4 pb-24">
       {/* Header with Export & Share */}
-      <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 bg-slate-900 p-3.5 rounded-2xl border border-slate-800">
+      <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 bg-white dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <BarChart3 className="w-5 h-5 text-indigo-400" />
-            <h2 className="text-base font-bold text-white tracking-tight">
+            <BarChart3 className="w-5 h-5 text-indigo-500" />
+            <h2 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
               {t.reports.title}
             </h2>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {formatDate(todayStr, language)} • {state.settings.shopName}
           </p>
         </div>
@@ -120,7 +120,7 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 text-xs font-bold border border-slate-700 transition-transform active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 text-xs font-bold border border-slate-200 dark:border-slate-700 transition-transform active:scale-95"
             title="Print PDF"
           >
             <Printer className="w-4 h-4" />
@@ -157,7 +157,7 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
               className={`px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all ${
                 isActive
                   ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                  : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 shadow-sm'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -173,53 +173,53 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
         {activeReport === 'daily' && (
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-2.5">
-              <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-                <span className="text-xs text-slate-400 font-semibold block">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block">
                   {language === 'hi' ? 'आज की कुल आमदनी' : 'Total Revenue Today'}
                 </span>
-                <span className="text-xl font-black text-emerald-400 mt-1 block">
+                <span className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-1 block">
                   {formatINR(totalSales)}
                 </span>
-                <span className="text-[10px] text-slate-400">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400">
                   Cash: {formatINR(todayGalla.cashIn)} • UPI: {formatINR(todayGalla.upiIn)}
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-                <span className="text-xs text-slate-400 font-semibold block">
+              <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold block">
                   {language === 'hi' ? 'दैनिक शुद्ध बचत' : 'Net Cashflow Today'}
                 </span>
-                <span className="text-xl font-black text-white mt-1 block">
+                <span className="text-xl font-black text-slate-900 dark:text-white mt-1 block">
                   {formatINR(totalSales - todayGalla.expenseOut)}
                 </span>
-                <span className="text-[10px] text-slate-400">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400">
                   {language === 'hi' ? 'बिक्री में से खर्चे घटाकर' : 'Sales minus expenses'}
                 </span>
               </div>
             </div>
 
-            <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 {language === 'hi' ? 'आज की मुख्य हलचल:' : "Today's Highlights:"}
               </h4>
               <div className="space-y-2 text-xs">
-                <div className="flex justify-between p-2.5 rounded-xl bg-slate-850 border border-slate-800">
-                  <span className="text-slate-300 font-medium">
+                <div className="flex justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">
                     {language === 'hi' ? 'उधारी वसूली (Received Udhari):' : 'Udhari Collected:'}
                   </span>
-                  <span className="font-bold text-emerald-400">{formatINR(totalCollectedUdhari)}</span>
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatINR(totalCollectedUdhari)}</span>
                 </div>
-                <div className="flex justify-between p-2.5 rounded-xl bg-slate-850 border border-slate-800">
-                  <span className="text-slate-300 font-medium">
+                <div className="flex justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">
                     {language === 'hi' ? 'सप्लायर को दिया भुगतान:' : 'Supplier Payments Paid:'}
                   </span>
-                  <span className="font-bold text-amber-400">{formatINR(totalSupplierPaid)}</span>
+                  <span className="font-bold text-amber-600 dark:text-amber-400">{formatINR(totalSupplierPaid)}</span>
                 </div>
-                <div className="flex justify-between p-2.5 rounded-xl bg-slate-850 border border-slate-800">
-                  <span className="text-slate-300 font-medium">
+                <div className="flex justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">
                     {language === 'hi' ? 'स्टाफ उपस्थिति:' : 'Staff Attendance:'}
                   </span>
-                  <span className="font-bold text-blue-400">
+                  <span className="font-bold text-blue-600 dark:text-blue-400">
                     {state.attendance.filter((a) => a.date === todayStr && a.status === 'present').length} / {state.staffList.length}
                   </span>
                 </div>
@@ -230,8 +230,8 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
 
         {/* 2. STAFF ATTENDANCE REPORT */}
         {activeReport === 'staff' && (
-          <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               {language === 'hi' ? 'स्टाफ उपस्थिति रजिस्टर:' : 'Staff Attendance Register:'}
             </h4>
             <div className="space-y-2">
@@ -240,17 +240,17 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
                 return (
                   <div
                     key={st.id}
-                    className="p-3 rounded-xl bg-slate-850 border border-slate-800 flex items-center justify-between text-xs"
+                    className="p-3 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
                   >
                     <div>
-                      <p className="font-bold text-white">{st.name}</p>
-                      <p className="text-[10px] text-slate-400">{st.role} • {st.phone}</p>
+                      <p className="font-bold text-slate-900 dark:text-white">{st.name}</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">{st.role} • {st.phone}</p>
                     </div>
                     <div className="text-right">
-                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase bg-emerald-500/20 text-emerald-300">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase bg-emerald-500/20 text-emerald-700 dark:text-emerald-300">
                         {att?.status || 'PRESENT'}
                       </span>
-                      <span className="block text-[10px] text-slate-400 mt-1">
+                      <span className="block text-[10px] text-slate-500 dark:text-slate-400 mt-1">
                         In: {att?.checkInTime || '09:00'}
                       </span>
                     </div>
@@ -263,12 +263,12 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
 
         {/* 3. UDHARI REPORT */}
         {activeReport === 'udhari' && (
-          <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 space-y-3">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 {language === 'hi' ? 'उधारी रिकवरी स्थिति' : 'Udhari Khata Status'}
               </h4>
-              <span className="text-xs font-bold text-rose-400">
+              <span className="text-xs font-bold text-rose-600 dark:text-rose-400">
                 कुल बाकी: {formatINR(totalPendingUdhari)}
               </span>
             </div>
@@ -276,17 +276,17 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
               {state.udhariList.map((u) => (
                 <div
                   key={u.id}
-                  className="p-3 rounded-xl bg-slate-850 border border-slate-800 flex items-center justify-between text-xs"
+                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
                 >
                   <div className="truncate mr-2">
-                    <p className="font-bold text-white truncate">{u.customerName}</p>
-                    <p className="text-[10px] text-slate-400 truncate">{u.itemName} ({u.quantity})</p>
+                    <p className="font-bold text-slate-900 dark:text-white truncate">{u.customerName}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{u.itemName} ({u.quantity})</p>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className={`font-black text-sm ${u.isPaid ? 'text-emerald-400' : 'text-rose-400'}`}>
+                    <span className={`font-black text-sm ${u.isPaid ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
                       {formatINR(u.amount)}
                     </span>
-                    <span className="block text-[10px] text-slate-400">
+                    <span className="block text-[10px] text-slate-500 dark:text-slate-400">
                       {u.isPaid ? 'चुकाया हुआ' : `देय: ${formatDate(u.dueDate, language)}`}
                     </span>
                   </div>
@@ -298,12 +298,12 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
 
         {/* 4. SUPPLIER REPORT */}
         {activeReport === 'supplier' && (
-          <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 space-y-3">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 {language === 'hi' ? 'सप्लायर खाता बही' : 'Supplier Ledger'}
               </h4>
-              <span className="text-xs font-bold text-amber-400">
+              <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
                 कुल देनदारी: {formatINR(totalSupplierDue)}
               </span>
             </div>
@@ -311,15 +311,15 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
               {state.supplierList.map((s) => (
                 <div
                   key={s.id}
-                  className="p-3 rounded-xl bg-slate-850 border border-slate-800 flex items-center justify-between text-xs"
+                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
                 >
                   <div className="truncate mr-2">
-                    <p className="font-bold text-white truncate">{s.supplierName}</p>
-                    <p className="text-[10px] text-slate-400 truncate">{s.itemPurchased}</p>
+                    <p className="font-bold text-slate-900 dark:text-white truncate">{s.supplierName}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{s.itemPurchased}</p>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="font-black text-sm text-amber-400">{formatINR(s.dueAmount)}</span>
-                    <span className="block text-[10px] text-slate-400">
+                    <span className="font-black text-sm text-amber-600 dark:text-amber-400">{formatINR(s.dueAmount)}</span>
+                    <span className="block text-[10px] text-slate-500 dark:text-slate-400">
                       कुल बिल: {formatINR(s.amount)}
                     </span>
                   </div>
@@ -331,12 +331,12 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
 
         {/* 5. SALARY REPORT */}
         {activeReport === 'salary' && (
-          <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 space-y-3">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 {language === 'hi' ? 'माह वेतन रजिस्टर' : 'Monthly Salary Register'}
               </h4>
-              <span className="text-xs font-bold text-purple-400">
+              <span className="text-xs font-bold text-purple-600 dark:text-purple-400">
                 कुल देय: {formatINR(totalNetSalaries)}
               </span>
             </div>
@@ -344,19 +344,19 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
               {salaryResults.map((s) => (
                 <div
                   key={s.staffId}
-                  className="p-3 rounded-xl bg-slate-850 border border-slate-800 flex items-center justify-between text-xs"
+                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
                 >
                   <div>
-                    <p className="font-bold text-white">{s.staffName}</p>
-                    <p className="text-[10px] text-slate-400">
+                    <p className="font-bold text-slate-900 dark:text-white">{s.staffName}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">
                       मूल: {formatINR(s.basicSalary)} • हाजिरी: {s.presentDays} दिन
                     </p>
                   </div>
                   <div className="text-right">
-                    <span className="font-black text-sm text-emerald-400">
+                    <span className="font-black text-sm text-emerald-600 dark:text-emerald-400">
                       {formatINR(s.netSalary)}
                     </span>
-                    <span className="block text-[10px] text-slate-400">
+                    <span className="block text-[10px] text-slate-500 dark:text-slate-400">
                       कटौती: -{formatINR(s.totalDeductions)}
                     </span>
                   </div>
@@ -368,12 +368,12 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
 
         {/* 6. EXPENSE REPORT */}
         {activeReport === 'expense' && (
-          <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 space-y-3">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <div className="flex justify-between items-center">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 {language === 'hi' ? 'खर्च रिपोर्ट व श्रेणी' : 'Expenses Breakdown'}
               </h4>
-              <span className="text-xs font-bold text-rose-400">
+              <span className="text-xs font-bold text-rose-600 dark:text-rose-400">
                 कुल खर्च: {formatINR(totalExpenses)}
               </span>
             </div>
@@ -381,13 +381,13 @@ export const ReportsTab: React.FC<ReportsTabProps> = ({ state, language }) => {
               {state.expenseList.map((e) => (
                 <div
                   key={e.id}
-                  className="p-3 rounded-xl bg-slate-850 border border-slate-800 flex items-center justify-between text-xs"
+                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs"
                 >
                   <div>
-                    <p className="font-bold text-white">{e.title}</p>
-                    <p className="text-[10px] text-slate-400">{e.category} • {formatDate(e.date, language)}</p>
+                    <p className="font-bold text-slate-900 dark:text-white">{e.title}</p>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400">{e.category} • {formatDate(e.date, language)}</p>
                   </div>
-                  <span className="font-black text-sm text-rose-400">
+                  <span className="font-black text-sm text-rose-600 dark:text-rose-400">
                     {formatINR(e.amount)}
                   </span>
                 </div>

@@ -454,7 +454,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
         <button
           id="btn-back-staff-tab"
           onClick={onBack}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 text-xs font-bold border border-slate-700 transition-all active:scale-95 shrink-0 shadow-sm"
+          className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 text-xs font-bold border border-slate-200 dark:border-slate-700 transition-all active:scale-95 shrink-0 shadow-sm cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Staff</span>
@@ -462,11 +462,11 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
 
         <div className="flex items-center gap-2 min-w-0">
           <div className="text-right min-w-0">
-            <h1 className="text-sm sm:text-base font-extrabold text-white tracking-tight truncate flex items-center justify-end gap-1.5">
-              <CalendarIcon className="w-4 h-4 text-emerald-400 shrink-0" />
+            <h1 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white tracking-tight truncate flex items-center justify-end gap-1.5">
+              <CalendarIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>Attendance Calendar</span>
             </h1>
-            <p className="text-[11px] text-slate-400 truncate">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
               {currentStaff.name} ({currentStaff.role})
             </p>
           </div>
@@ -474,16 +474,16 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
       </div>
 
       {/* Staff Selector & Search Option */}
-      <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2.5 shadow-lg">
+      <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2.5 shadow-sm">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
           {/* Staff Member Selector */}
           <div className="flex-1 flex items-center gap-2">
-            <User className="w-4 h-4 text-emerald-400 shrink-0" />
+            <User className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <select
               id="select-calendar-staff"
               value={selectedStaffId}
               onChange={(e) => setSelectedStaffId(e.target.value)}
-              className="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs font-bold focus:outline-none focus:border-emerald-500"
+              className="flex-1 px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:border-emerald-500 shadow-sm"
             >
               {filteredStaffDropdown.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -501,31 +501,31 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
               value={staffSearchQuery}
               onChange={(e) => setStaffSearchQuery(e.target.value)}
               placeholder="Search staff..."
-              className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-emerald-500"
+              className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-emerald-500 shadow-sm"
             />
           </div>
         </div>
       </div>
 
       {/* Month Selector & Controls + Today Button */}
-      <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-wrap items-center justify-between gap-2 shadow-lg">
+      <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 shadow-sm">
         {/* Month Stepper */}
         <div className="flex items-center gap-1.5">
           <button
             onClick={handlePrevMonth}
-            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
             title="Previous Month"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <span className="font-bold text-xs sm:text-sm text-white px-2 tracking-wide">
+          <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white px-2 tracking-wide">
             {monthNameLong}
           </span>
 
           <button
             onClick={handleNextMonth}
-            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors cursor-pointer"
             title="Next Month"
           >
             <ChevronRight className="w-4 h-4" />
@@ -538,7 +538,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
           <button
             id="btn-calendar-today"
             onClick={handleJumpToToday}
-            className="px-3 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-400 text-xs font-bold transition-all active:scale-95 shadow-sm"
+            className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-500/15 dark:hover:bg-emerald-500/25 border border-emerald-200 dark:border-emerald-500/40 text-emerald-700 dark:text-emerald-400 text-xs font-bold transition-all active:scale-95 shadow-sm cursor-pointer"
           >
             Today
           </button>
@@ -549,7 +549,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="px-2.5 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-300 text-xs font-semibold focus:outline-none focus:border-emerald-500"
+              className="px-2.5 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold focus:outline-none focus:border-emerald-500 shadow-sm"
             >
               <option value="all">All Days</option>
               <option value="present">Present (Green)</option>
@@ -565,7 +565,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
       </div>
 
       {/* Color Legend (as specified in User Request) */}
-      <div className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/80 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 text-[11px] font-semibold text-slate-300">
+      <div className="p-3 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800/80 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300 shadow-sm">
         <span className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
           <span>Present</span>
@@ -599,16 +599,16 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
       {/* ========================================================================= */}
       {/* 1. ATTENDANCE CALENDAR GRID VIEW */}
       {/* ========================================================================= */}
-      <div className="p-3.5 sm:p-5 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl space-y-3">
+      <div className="p-3.5 sm:p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
         {/* Days of Week Header */}
-        <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center text-[11px] font-extrabold text-slate-400 uppercase tracking-wider pb-1">
-          <span className="text-rose-400">Sun</span>
+        <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center text-[11px] font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wider pb-1">
+          <span className="text-rose-500 dark:text-rose-400">Sun</span>
           <span>Mon</span>
           <span>Tue</span>
           <span>Wed</span>
           <span>Thu</span>
           <span>Fri</span>
-          <span className="text-blue-400">Sat</span>
+          <span className="text-blue-500 dark:text-blue-400">Sat</span>
         </div>
 
         {/* Date Cells */}
@@ -633,12 +633,12 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
               <button
                 key={`${cell.dateStr}-${idx}`}
                 onClick={() => setSelectedDate(cell.dateStr)}
-                className={`min-h-[52px] sm:min-h-[64px] p-1 sm:p-1.5 rounded-2xl flex flex-col justify-between items-center transition-all relative border text-left ${
-                  cell.isCurrentMonth ? statusConfig.calendarBg : 'bg-slate-950/40 border-slate-850 text-slate-600'
+                className={`min-h-[52px] sm:min-h-[64px] p-1 sm:p-1.5 rounded-2xl flex flex-col justify-between items-center transition-all relative border text-left cursor-pointer ${
+                  cell.isCurrentMonth ? statusConfig.calendarBg : 'bg-slate-50 dark:bg-slate-950/40 border-slate-200 dark:border-slate-850 text-slate-400 dark:text-slate-600'
                 } ${
                   isSelected
-                    ? 'ring-2 ring-emerald-400 shadow-lg scale-[1.04] z-10'
-                    : 'hover:border-slate-600'
+                    ? 'ring-2 ring-emerald-500 shadow-lg scale-[1.04] z-10'
+                    : 'hover:border-slate-400 dark:hover:border-slate-600'
                 } ${isDimmed ? 'opacity-25' : 'opacity-100'} active:scale-95`}
               >
                 {/* Day Number and Today Badge */}
@@ -646,12 +646,12 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
                   <span
                     className={`text-xs sm:text-sm font-black ${
                       isToday
-                        ? 'w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-bold text-[11px]'
+                        ? 'w-5 h-5 rounded-full bg-emerald-600 dark:bg-emerald-500 text-white dark:text-slate-950 flex items-center justify-center font-bold text-[11px]'
                         : isSelected
-                        ? 'text-white font-extrabold'
+                        ? 'text-slate-900 dark:text-white font-extrabold'
                         : cell.isCurrentMonth
-                        ? 'text-slate-200'
-                        : 'text-slate-600'
+                        ? 'text-slate-800 dark:text-slate-200'
+                        : 'text-slate-400 dark:text-slate-600'
                     }`}
                   >
                     {cell.dayNum}
@@ -659,7 +659,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
 
                   {/* Overtime indicator pill if OT exists */}
                   {rec && (rec.overtimeHours || 0) > 0 && (
-                    <span className="text-[9px] font-black text-purple-300 bg-purple-500/30 px-1 rounded">
+                    <span className="text-[9px] font-black text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-500/30 px-1 rounded">
                       +{rec.overtimeHours}h
                     </span>
                   )}
@@ -671,16 +671,16 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
                     <span
                       className={`text-[9px] sm:text-[10px] font-bold truncate max-w-full px-1 rounded uppercase tracking-tighter ${
                         rec.status === 'present'
-                          ? 'text-emerald-400'
+                          ? 'text-emerald-700 dark:text-emerald-400'
                           : rec.status === 'absent'
-                          ? 'text-rose-400'
+                          ? 'text-rose-700 dark:text-rose-400'
                           : rec.status === 'half_day'
-                          ? 'text-orange-400'
+                          ? 'text-orange-700 dark:text-orange-400'
                           : rec.status === 'late'
-                          ? 'text-yellow-300'
+                          ? 'text-yellow-700 dark:text-yellow-300'
                           : rec.status === 'overtime'
-                          ? 'text-purple-300'
-                          : 'text-blue-400'
+                          ? 'text-purple-700 dark:text-purple-300'
+                          : 'text-blue-700 dark:text-blue-400'
                       }`}
                     >
                       {rec.status === 'half_day'
@@ -690,7 +690,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
                         : rec.status}
                     </span>
                   ) : (
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-700" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700" />
                   )}
                 </div>
               </button>
@@ -702,23 +702,23 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
       {/* ========================================================================= */}
       {/* 2. DATE DETAILS SECTION (When owner taps a date) */}
       {/* ========================================================================= */}
-      <div className="p-4 sm:p-5 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl space-y-4">
+      <div className="p-4 sm:p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
         {/* Header of Date Details */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-800 gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 gap-2">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Date Details
               </span>
               <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${selectedDateConfig.badgeClass}`}>
                 {selectedDateConfig.label}
               </span>
             </div>
-            <h3 className="text-base sm:text-lg font-black text-white mt-0.5">
+            <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white mt-0.5">
               {formatDateHeading(selectedDate)}
             </h3>
-            <p className="text-xs text-slate-400">
-              Staff: <strong className="text-white">{currentStaff.name}</strong> • Role: {currentStaff.role}
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Staff: <strong className="text-slate-900 dark:text-white">{currentStaff.name}</strong> • Role: {currentStaff.role}
             </p>
           </div>
 
@@ -731,7 +731,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
                 date: selectedDate,
               })
             }
-            className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-950/40 transition-all active:scale-95 shrink-0"
+            className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-500/20 transition-all active:scale-95 shrink-0 cursor-pointer"
           >
             <Edit2 className="w-3.5 h-3.5" />
             <span>{selectedDateRecord ? 'Edit Attendance' : 'Mark Attendance'}</span>
@@ -741,43 +741,43 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
         {/* Detailed Metrics Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
           {/* Check-In Time */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
               Check-In Time
             </span>
-            <span className="font-mono text-sm font-bold text-white block">
+            <span className="font-mono text-sm font-bold text-slate-900 dark:text-white block">
               {selectedDateRecord?.checkInTime || selectedDateRecord?.check_in || '—'}
             </span>
           </div>
 
           {/* Check-Out Time */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
               Check-Out Time
             </span>
-            <span className="font-mono text-sm font-bold text-white block">
+            <span className="font-mono text-sm font-bold text-slate-900 dark:text-white block">
               {selectedDateRecord?.checkOutTime || selectedDateRecord?.check_out || '—'}
             </span>
           </div>
 
           {/* Total Working Hours */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
               Working Hours
             </span>
-            <span className="font-mono text-sm font-bold text-emerald-400 block">
+            <span className="font-mono text-sm font-bold text-emerald-600 dark:text-emerald-400 block">
               {selectedDateWorkingHours > 0 ? `${selectedDateWorkingHours} hrs` : '0 hrs'}
             </span>
           </div>
 
           {/* Late Minutes */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
               Late Minutes
             </span>
             <span
               className={`font-mono text-sm font-bold block ${
-                (selectedDateRecord?.lateMinutes || 0) > 0 ? 'text-yellow-400' : 'text-slate-400'
+                (selectedDateRecord?.lateMinutes || 0) > 0 ? 'text-yellow-600 dark:text-yellow-400' : 'text-slate-500 dark:text-slate-400'
               }`}
             >
               {selectedDateRecord?.lateMinutes || selectedDateRecord?.late_minutes || 0} mins
@@ -785,52 +785,52 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
           </div>
 
           {/* Overtime Hours */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">
               Overtime Hours
             </span>
-            <span className="font-mono text-sm font-bold text-purple-300 block">
+            <span className="font-mono text-sm font-bold text-purple-700 dark:text-purple-300 block">
               {selectedDateOtHours > 0 ? `+${selectedDateOtHours} hrs` : '0 hrs'}
             </span>
           </div>
 
           {/* Overtime Amount */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider block">
               Overtime Amount
             </span>
-            <span className="font-mono text-sm font-bold text-purple-300 block">
+            <span className="font-mono text-sm font-bold text-purple-700 dark:text-purple-300 block">
               {selectedDateOtAmount > 0 ? formatINR(selectedDateOtAmount) : '₹0'}
             </span>
           </div>
 
           {/* Half-Day Amount */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider block">
               Half-Day Amount
             </span>
-            <span className="font-mono text-sm font-bold text-orange-300 block">
+            <span className="font-mono text-sm font-bold text-orange-700 dark:text-orange-300 block">
               {selectedDateHalfDayAmount > 0 ? formatINR(selectedDateHalfDayAmount) : '₹0'}
             </span>
           </div>
 
           {/* Standard Shift */}
-          <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-1">
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
               Standard Shift
             </span>
-            <span className="font-mono text-sm font-bold text-white block">
+            <span className="font-mono text-sm font-bold text-slate-900 dark:text-white block">
               {standardHours} hrs / day
             </span>
           </div>
         </div>
 
         {/* Notes Preview */}
-        <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
+        <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs">
+          <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-0.5">
             Notes / Remarks:
           </span>
-          <p className="text-slate-300 italic">
+          <p className="text-slate-700 dark:text-slate-300 italic">
             {selectedDateRecord?.note ? `"${selectedDateRecord.note}"` : 'No notes recorded for this date.'}
           </p>
         </div>
@@ -839,13 +839,13 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
       {/* ========================================================================= */}
       {/* 3. MONTH SUMMARY SECTION */}
       {/* ========================================================================= */}
-      <div className="p-4 sm:p-5 rounded-3xl bg-slate-900 border border-slate-800 shadow-xl space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-800 gap-2">
+      <div className="p-4 sm:p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 gap-2">
           <div>
-            <h3 className="text-base font-black text-white leading-tight">
+            <h3 className="text-base font-black text-slate-900 dark:text-white leading-tight">
               Month Summary ({monthNameLong})
             </h3>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Complete attendance & salary deduction metrics for {currentStaff.name}
             </p>
           </div>
@@ -855,7 +855,7 @@ export const AttendanceCalendarScreen: React.FC<AttendanceCalendarScreenProps> =
             <button
               id="btn-export-attendance-csv"
               onClick={handleExportAttendance}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 text-xs font-bold border border-slate-700 transition-all active:scale-95 shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 text-xs font-bold border border-slate-200 dark:border-slate-700 transition-all active:scale-95 shadow-sm cursor-pointer"
               title="Download CSV attendance sheet"
             >
               <Download className="w-3.5 h-3.5 text-sky-400" />

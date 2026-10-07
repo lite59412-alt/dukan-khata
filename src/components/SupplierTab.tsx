@@ -337,37 +337,37 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
         /* ========================================================================= */
         <div className="space-y-4">
           {/* Back Navigation Bar */}
-          <div className="flex items-center justify-between bg-slate-900 p-3 rounded-2xl border border-slate-800">
+          <div className="flex items-center justify-between bg-white dark:bg-slate-900 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <button
               onClick={() => setSelectedSupplierKey(null)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white text-xs font-bold transition-all active:scale-95"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs font-bold transition-all active:scale-95"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>{t.common.back}</span>
             </button>
 
-            <span className="text-xs font-semibold text-slate-400">
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
               {language === 'hi' ? 'सप्लायर खाता विवरण' : 'Supplier Account Profile'}
             </span>
           </div>
 
           {/* Supplier Profile Card & Clean Summary */}
-          <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 shadow-sm space-y-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
             <div className="flex items-start justify-between">
               <div>
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-black text-sm">
+                  <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 font-black text-sm">
                     {selectedSupplier.name.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <h2 className="text-base font-bold text-white leading-tight">
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white leading-tight">
                       {selectedSupplier.name}
                     </h2>
                     <a
                       href={`tel:${selectedSupplier.phone}`}
-                      className="text-xs text-slate-400 hover:text-amber-400 flex items-center gap-1.5 mt-0.5"
+                      className="text-xs text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1.5 mt-0.5"
                     >
-                      <Phone className="w-3.5 h-3.5 text-slate-500" />
+                      <Phone className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                       <span>{selectedSupplier.phone}</span>
                     </a>
                   </div>
@@ -401,31 +401,31 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
             </div>
 
             {/* 4 Clean Summary Stat Boxes */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-800 text-center">
-              <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-200 dark:border-slate-800 text-center">
+              <div className="bg-slate-50 dark:bg-slate-950/60 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-semibold mb-0.5">
                   {language === 'hi' ? 'कुल खरीद' : 'Total Purchased'}
                 </span>
-                <span className="text-sm font-bold text-white">
+                <span className="text-sm font-bold text-slate-900 dark:text-white">
                   {formatINR(selectedSupplier.totalAmount)}
                 </span>
               </div>
 
-              <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                <span className="block text-[10px] text-emerald-400 font-semibold mb-0.5">
+              <div className="bg-slate-50 dark:bg-slate-950/60 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="block text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold mb-0.5">
                   {language === 'hi' ? 'कुल भुगतान' : 'Total Paid'}
                 </span>
-                <span className="text-sm font-bold text-emerald-400">
+                <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
                   {formatINR(selectedSupplier.totalPaid)}
                 </span>
               </div>
 
               <div className={`p-2.5 rounded-xl border ${
                 selectedSupplier.totalDue > 0
-                  ? 'bg-amber-950/40 border-amber-800/40 text-amber-400'
-                  : 'bg-slate-950/60 border-slate-800 text-slate-400'
+                  ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800/40 text-amber-700 dark:text-amber-400'
+                  : 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400'
               }`}>
-                <span className="block text-[10px] text-amber-400 font-semibold mb-0.5">
+                <span className="block text-[10px] text-amber-600 dark:text-amber-400 font-semibold mb-0.5">
                   {language === 'hi' ? 'शेष देनदारी' : 'Remaining Due'}
                 </span>
                 <span className="text-sm font-extrabold">
@@ -433,11 +433,11 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
                 </span>
               </div>
 
-              <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                <span className="block text-[10px] text-slate-400 font-semibold mb-0.5">
+              <div className="bg-slate-50 dark:bg-slate-950/60 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+                <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-semibold mb-0.5">
                   {language === 'hi' ? 'कुल बिल' : 'Purchases'}
                 </span>
-                <span className="text-sm font-bold text-white">
+                <span className="text-sm font-bold text-slate-900 dark:text-white">
                   {selectedSupplier.bills.length} {language === 'hi' ? 'बिल' : 'bills'}
                 </span>
               </div>
@@ -784,17 +784,17 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
         /* ========================================================================= */
         <div className="space-y-4">
           {/* Header & Prominent Add Button */}
-          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 bg-slate-900 p-3.5 rounded-2xl border border-slate-800">
+          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2.5 bg-white dark:bg-slate-900 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <div>
               <div className="flex items-center gap-2">
-                <Truck className="w-5 h-5 text-amber-400" />
-                <h2 className="text-base font-bold text-white tracking-tight">
+                <Truck className="w-5 h-5 text-amber-500" />
+                <h2 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
                   {t.supplier.title}
                 </h2>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 {language === 'hi' ? 'कुल सप्लायर देनदारी:' : 'Total Supplier Due:'}{' '}
-                <span className="text-amber-400 font-bold">{formatINR(grandTotalDue)}</span>
+                <span className="text-amber-600 dark:text-amber-400 font-bold">{formatINR(grandTotalDue)}</span>
               </p>
             </div>
 
@@ -811,7 +811,7 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
           {/* Search Bar & Filters */}
           <div className="space-y-2">
             <div className="relative">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
               <input
                 type="text"
                 placeholder={
@@ -821,7 +821,7 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
                 }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-amber-500 shadow-sm"
               />
             </div>
 
@@ -833,8 +833,8 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
                   onClick={() => setListFilter(mode)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold capitalize transition-all border ${
                     listFilter === mode
-                      ? 'bg-amber-500/20 text-amber-300 border-amber-500/50'
-                      : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-white'
+                      ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/50'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   {mode === 'pending'
@@ -850,9 +850,9 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
           {/* Supplier List: Customer-First Clean Cards */}
           <div className="space-y-2.5">
             {filteredSuppliers.length === 0 ? (
-              <div className="bg-slate-900 rounded-2xl p-8 border border-slate-800 text-center space-y-2">
-                <Truck className="w-10 h-10 text-slate-600 mx-auto" />
-                <p className="text-sm font-semibold text-slate-300">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 text-center space-y-2 shadow-sm">
+                <Truck className="w-10 h-10 text-slate-400 dark:text-slate-600 mx-auto" />
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-300">
                   {language === 'hi' ? 'कोई सप्लायर रिकॉर्ड नहीं मिला' : 'No supplier entries found'}
                 </p>
                 <p className="text-xs text-slate-500">
@@ -871,7 +871,7 @@ export const SupplierTab: React.FC<SupplierTabProps> = ({
                     onClick={() => {
                       setSelectedSupplierKey(supplier.key);
                     }}
-                    className="bg-slate-900 hover:bg-slate-850 active:bg-slate-800 rounded-2xl p-3.5 border border-slate-800 shadow-sm cursor-pointer transition-all flex items-center justify-between gap-3 group"
+                    className="bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 active:bg-slate-100 dark:active:bg-slate-800 rounded-2xl p-3.5 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm cursor-pointer transition-all flex items-center justify-between gap-3 group"
                   >
                     {/* Left: Supplier Identity & Meta */}
                     <div className="flex items-center gap-3">

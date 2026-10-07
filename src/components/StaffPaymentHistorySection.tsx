@@ -115,9 +115,14 @@ export const StaffPaymentHistorySection: React.FC<StaffPaymentHistorySectionProp
         <div className="p-6 rounded-xl bg-slate-950/60 border border-slate-800 text-center space-y-1.5">
           <History className="w-8 h-8 text-slate-600 mx-auto" />
           <p className="text-xs font-bold text-slate-300">
-            {filterMode === 'month' && selectedMonthLabel
-              ? `No payment records in ${selectedMonthLabel}`
+            {filterMode === 'month'
+              ? 'No payments this month'
               : 'No payment records yet'}
+          </p>
+          <p className="text-[11px] text-slate-500">
+            {filterMode === 'month' && selectedMonthLabel ? (
+              <span>No completed payments recorded for {selectedMonthLabel}.</span>
+            ) : null}
           </p>
           <p className="text-[11px] text-slate-500">
             {filterMode === 'month' && allStaffPayments.length > 0 ? (
