@@ -65,6 +65,12 @@ import { SalarySlipModal } from './components/SalarySlipModal';
 import { QRScannerModal } from './components/QRScannerModal';
 import { BackupRestoreModal } from './components/BackupRestoreModal';
 import { SettingsModal } from './components/SettingsModal';
+import { UpdateAvailableModal } from './components/UpdateAvailableModal';
+import {
+  checkForAppUpdate,
+  CURRENT_APP_VERSION,
+  VersionControlConfig,
+} from './utils/versionService';
 import { Language } from './types';
 
 export default function App() {
@@ -117,6 +123,12 @@ export default function App() {
     message: string;
   } | null>(null);
 
+  // In-App Update Checker State (app_config/version_control)
+  const [availableUpdate, setAvailableUpdate] = useState<{
+    config: VersionControlConfig;
+    currentVersion: string;
+  } | null>(null);
+
   // Auto-dismiss sync notification after 3.5 seconds
   useEffect(() => {
     if (syncNotification) {
@@ -124,6 +136,63 @@ export default function App() {
       return () => clearTimeout(timer);
     }
   }, [syncNotification]);
+
+  // Launch Update Checker: Compares current app version with Firestore 'app_config/version_control'
+  useEffect(() => {
+    let isMounted = true;
+    const timer = setTimeout(async () => {
+      try {
+        const result = await checkForAppUpdate(CURRENT_APP_VERSION);
+        if (isMounted && result.hasUpdate && result.config) {
+          // If update is not mandatory, check if dismissed in current session
+          const dismissedVersion = sessionStorage.getItem('dismissed_update_version');
+          if (!result.config.is_mandatory && dismissedVersion === result.config.version) {
+            return;
+          }
+          setAvailableUpdate({
+            config: result.config,
+            currentVersion: result.currentVersion,
+          });
+        }
+      } catch (err) {
+        console.warn('[App] Automatic launch update check failed:', err);
+      }
+    }, 1200);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const handleDismissUpdate = () => {
+    if (availableUpdate?.config?.version) {
+      sessionStorage.setItem('dismissed_update_version', availableUpdate.config.version);
+    }
+    setAvailableUpdate(null);
+  };
+
+  const handleManualCheckUpdate = async () => {
+    try {
+      const result = await checkForAppUpdate(CURRENT_APP_VERSION);
+      if (result.hasUpdate && result.config) {
+        setAvailableUpdate({
+          config: result.config,
+          currentVersion: result.currentVersion,
+        });
+      } else {
+        setSyncNotification({
+          type: 'success',
+          message: `App up to date! (v${CURRENT_APP_VERSION})`,
+        });
+      }
+    } catch {
+      setSyncNotification({
+        type: 'error',
+        message: 'Could not connect to update server.',
+      });
+    }
+  };
 
   // Guest Mode Session Unload & Clean Startup Handlers
   useEffect(() => {
@@ -1034,20 +1103,20 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center">
+    <div className="min-h-screen bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col items-center transition-colors">
       {/* Container with optional Mobile Frame simulation */}
       <div
         className={`w-full transition-all duration-300 ${
           deviceFrameMode
-            ? 'max-w-[420px] my-4 rounded-[40px] border-[10px] border-slate-800 shadow-2xl overflow-hidden bg-slate-950 min-h-[860px] relative'
-            : 'max-w-2xl bg-slate-950 min-h-screen'
+            ? 'max-w-[420px] my-4 rounded-[40px] border-[10px] border-slate-300 dark:border-slate-800 shadow-2xl overflow-hidden bg-slate-50 dark:bg-slate-950 min-h-[860px] relative'
+            : 'max-w-2xl bg-slate-50 dark:bg-slate-950 min-h-screen border-x border-slate-200/80 dark:border-slate-800/80'
         }`}
       >
         {/* Device Frame Top Notch (only when framed) */}
         {deviceFrameMode && (
-          <div className="w-full flex justify-center pt-2 pb-1 bg-slate-900 border-b border-slate-800">
-            <div className="w-24 h-4 bg-slate-950 rounded-full flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-slate-800" />
+          <div className="w-full flex justify-center pt-2 pb-1 bg-slate-200 dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800">
+            <div className="w-24 h-4 bg-slate-100 dark:bg-slate-950 rounded-full flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-800" />
             </div>
           </div>
         )}
@@ -1275,6 +1344,7 @@ export default function App() {
             setShowSettingsModal(false);
             setShowBackupModal(true);
           }}
+          onTriggerCheckUpdate={handleManualCheckUpdate}
           onClose={() => setShowSettingsModal(false)}
         />
       )}
@@ -1290,6 +1360,16 @@ export default function App() {
               message: `Naya 1-Year Key (${key}) Firestore me save ho gaya!`,
             });
           }}
+        />
+      )}
+
+      {/* 8. In-App Update Available Modal (app_config/version_control) */}
+      {availableUpdate && (
+        <UpdateAvailableModal
+          isOpen={Boolean(availableUpdate)}
+          currentVersion={availableUpdate.currentVersion}
+          config={availableUpdate.config}
+          onClose={handleDismissUpdate}
         />
       )}
 
