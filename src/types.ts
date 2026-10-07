@@ -1,4 +1,6 @@
 export type Language = 'en' | 'hi' | 'or' | 'bn';
+export type ThemeMode = 'light' | 'dark' | 'system';
+export type EffectiveTheme = 'light' | 'dark';
 
 export type AttendanceStatus = 'present' | 'absent' | 'half_day' | 'late' | 'overtime' | 'leave';
 
@@ -30,6 +32,7 @@ export interface Staff {
   role: string;
   basicSalary: number; // in INR
   joinDate: string;
+  joiningDate?: string;
   avatarBg: string;
   qrCodeId: string;
   salaryRules?: SalaryRules;
@@ -340,6 +343,7 @@ export interface ShopSettings {
   lastBackupDate: string;
   workingDaysPerMonth: number;
   voiceAddUdhariEnabled?: boolean;
+  theme?: ThemeMode;
 }
 
 export interface PopularItem {

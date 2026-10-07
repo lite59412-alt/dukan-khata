@@ -1,5 +1,12 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
-import { getAuth, Auth, GoogleAuthProvider } from 'firebase/auth';
+import {
+  initializeAuth,
+  getAuth,
+  Auth,
+  GoogleAuthProvider,
+  indexedDBLocalPersistence,
+  browserLocalPersistence,
+} from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 
 // User's Firebase Project Configuration
@@ -18,8 +25,17 @@ export const isFirebaseConfigured = Boolean(firebaseConfig.apiKey && firebaseCon
 // Initialize Firebase App instance
 export const app: FirebaseApp = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
-// Initialize Firebase Services
-export const auth: Auth = getAuth(app);
+// Initialize Firebase Auth with persistent indexedDB + browserLocalPersistence fallback
+export const auth: Auth = (() => {
+  try {
+    return initializeAuth(app, {
+      persistence: [indexedDBLocalPersistence, browserLocalPersistence],
+    });
+  } catch {
+    return getAuth(app);
+  }
+})();
+
 export const db: Firestore = getFirestore(app);
 
 // Google Auth Provider

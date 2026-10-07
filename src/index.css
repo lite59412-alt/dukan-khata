@@ -1,1 +1,165 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-card: var(--color-card);
+  --color-border: var(--color-border);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+}
+
+:root {
+  --color-background: #090d16;
+  --color-surface: #0f172a;
+  --color-surface-variant: #1e293b;
+  --color-card: #0f172a;
+  --color-primary: #10b981;
+  --color-on-primary: #022c22;
+  --color-secondary: #38bdf8;
+  --color-on-secondary: #0f172a;
+  --color-accent: #818cf8;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-disabled: #64748b;
+  --color-border: #334155;
+  --color-divider: #1e293b;
+  --color-input-background: #1e293b;
+  --color-input-border: #334155;
+  --color-success: #22c55e;
+  --color-on-success: #052e16;
+  --color-warning: #f59e0b;
+  --color-on-warning: #451a03;
+  --color-error: #ef4444;
+  --color-on-error: #450a0a;
+  --color-info: #3b82f6;
+  --color-on-info: #172554;
+  --color-selected: #064e3b;
+  --color-pressed: #172554;
+  --color-disabled: #334155;
+  --color-overlay: rgba(0, 0, 0, 0.75);
+  --color-navigation-background: #0f172a;
+  --color-navigation-selected: #10b981;
+  --color-navigation-unselected: #94a3b8;
+
+  --color-focus-border: #10b981;
+  --color-error-border: #ef4444;
+  --color-input-placeholder: #64748b;
+  --color-input-label: #94a3b8;
+  --color-tab-unselected-bg: #0f172a;
+  --color-tab-unselected-text: #94a3b8;
+  --color-tab-unselected-border: #334155;
+  --color-tab-selected-bg: #064e3b;
+  --color-tab-selected-text: #34d399;
+  --color-tab-selected-indicator: #10b981;
+  --color-tab-pressed-bg: #172554;
+  --color-tab-pressed-text: #38bdf8;
+  --color-tab-disabled-bg: #1e293b;
+  --color-tab-disabled-text: #64748b;
+  --color-btn-primary-bg: #10b981;
+  --color-btn-primary-text: #022c22;
+  --color-btn-secondary-bg: #1e293b;
+  --color-btn-secondary-text: #38bdf8;
+  --color-btn-secondary-border: #334155;
+  --color-btn-danger-bg: #ef4444;
+  --color-btn-danger-text: #ffffff;
+
+  /* Compatibility aliases */
+  --color-bg: var(--color-background);
+  --color-on-surface: var(--color-text-primary);
+  --color-on-surface-variant: var(--color-text-secondary);
+  --color-outline: var(--color-border);
+  --color-outline-variant: var(--color-divider);
+
+  color-scheme: dark;
+}
+
+.dark {
+  --color-background: #090d16;
+  --color-surface: #0f172a;
+  --color-surface-variant: #1e293b;
+  --color-card: #0f172a;
+  --color-primary: #10b981;
+  --color-on-primary: #022c22;
+  --color-secondary: #38bdf8;
+  --color-on-secondary: #0f172a;
+  --color-accent: #818cf8;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-disabled: #64748b;
+  --color-border: #334155;
+  --color-divider: #1e293b;
+  --color-input-background: #1e293b;
+  --color-input-border: #334155;
+  --color-success: #22c55e;
+  --color-on-success: #052e16;
+  --color-warning: #f59e0b;
+  --color-on-warning: #451a03;
+  --color-error: #ef4444;
+  --color-on-error: #450a0a;
+  --color-info: #3b82f6;
+  --color-on-info: #172554;
+  --color-selected: #064e3b;
+  --color-pressed: #172554;
+  --color-disabled: #334155;
+  --color-overlay: rgba(0, 0, 0, 0.75);
+  --color-navigation-background: #0f172a;
+  --color-navigation-selected: #10b981;
+  --color-navigation-unselected: #94a3b8;
+
+  /* Dark fallbacks for extended tokens to guarantee dark theme preservation */
+  --color-focus-border: #10b981;
+  --color-error-border: #ef4444;
+  --color-input-placeholder: #64748b;
+  --color-input-label: #94a3b8;
+  --color-tab-unselected-bg: #0f172a;
+  --color-tab-unselected-text: #94a3b8;
+  --color-tab-unselected-border: #334155;
+  --color-tab-selected-bg: #064e3b;
+  --color-tab-selected-text: #34d399;
+  --color-tab-selected-indicator: #10b981;
+  --color-tab-pressed-bg: #172554;
+  --color-tab-pressed-text: #38bdf8;
+  --color-tab-disabled-bg: #1e293b;
+  --color-tab-disabled-text: #64748b;
+  --color-btn-primary-bg: #10b981;
+  --color-btn-primary-text: #022c22;
+  --color-btn-secondary-bg: #1e293b;
+  --color-btn-secondary-text: #38bdf8;
+  --color-btn-secondary-border: #334155;
+  --color-btn-danger-bg: #ef4444;
+  --color-btn-danger-text: #ffffff;
+
+  /* Compatibility aliases */
+  --color-bg: var(--color-background);
+  --color-on-surface: var(--color-text-primary);
+  --color-on-surface-variant: var(--color-text-secondary);
+  --color-outline: var(--color-border);
+  --color-outline-variant: var(--color-divider);
+
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Elegant responsive scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(51, 65, 85, 0.6);
+  border-radius: 9999px;
+}
+
